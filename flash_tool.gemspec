@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["milboj"]
+  s.authors = ["Bojan Milosavljevic"]
   s.date = %q{2010-03-20}
   s.description = %q{A ruby wrapper for swftool command line tool. http://www.swftools.org/ 
 Flash tool is small and mini tool for creating swf files from pdfs, pictures and

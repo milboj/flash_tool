@@ -11,7 +11,7 @@ Flash tool is small and mini tool for creating swf files from pdfs, pictures and
 fonts and parsing data from flash files."
     gem.email = "milboj@gmail.com"
     gem.homepage = "http://github.com/milboj/flash_tool"
-    gem.authors = ["milboj"]
+    gem.authors = ["Bojan Milosavljevic"]
     gem.rubyforge_project = 'flash_tool'
 
 
