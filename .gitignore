@@ -1,0 +1,8 @@
+pkg
+nbproject
+doc
+# rcov generated
+coverage
+ 
+# jeweler generated
+pkg

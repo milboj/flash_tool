@@ -1,0 +1,91 @@
+= Flash Tool
+
+A ruby wrapper for swftool command line tool. http://www.swftools.org/
+
+Flash tool is small and mini tool for creating swf files from pdfs, pictures and
+fonts and parsing data from flash files.
+
+== Use
+
+With this wrapper you commands from swftools program.
+
+SWFTools is a collection of utilities for working with Adobe Flash files.
+With Flash tool you can easely creates and manipulates flash files.
+
+== Creating flash files
+
+With Flash tool you can create swf file from pdf, jpeg (jpeg and jpg extension),
+png, gif, fonts (ttf, afm,  pfa, pfb formats) and wav(this funcionality is untested
+and you can often have problems with SWFTools installation with command wav2swf)
+
+Simple creating flash object from pdf file
+
+ swfile = FlashObject.new('path_to_file.pdf')
+ swfile.pages('1-10')
+ swfile.jpegquality('80')
+ swfile.save('outputfile_path.swf') # no need to declare ouptutfile_path in save if you used swfile.output() method before
+
+Creating file from other format is very similar
+
+Example for jpg
+
+ swfile = FlashObject.new('path_to_file.jpg')
+ swfile.output('outputfile_path.swf')
+ swfile.save()
+
+Flash tool automaticly recognize extension of file and call propriete SWFTool program
+If you use files without extension you just simply add string of extension when
+initialize FlashObject
+
+ swfile = FlashObject.new('path_to_file','jpg')
+
+You can use tempfile
+
+ swfile = FlashOject.from_blob('path_to_file','jpg')
+
+Creating flash with viewer
+
+ swfile = FlashObject.new('path_to_file.pdf')
+ swfile.pages('1-10')
+ swfile.viewer('path_to_viewer_file')
+ swfile.save('outputfile_path.swf')
+
+SWFTool command will be called when you save object.
+
+==Parsing text from file
+
+It is very simple
+
+ FlashTool.parse_text('path_to_file.swf')
+
+==Geting data from flash files
+
+You can get data from flash files with swfdump tool
+
+ FlashTool.swfdump('path_to_file.swf', 'command') #use swfdump options http://www.swftools.org/swfdump.html
+
+Don't use option text it is buggy, instead use method FlashTool.parse_text
+With method swfdump output is string
+
+Better way
+
+ FlashTool.(command) List of command can get from http://www.swftools.org/swfdump.html
+
+Examples
+ FlashTool.rate(file)   #return Float
+ FlashTool.width(file)  #return Integer
+ FlashTool.height(file) #return Integer
+ FlashTool.frames(file) #return Integer
+
+Other methods returns String
+
+All this methods call commands swfdump, every time you call method. If you want
+to do it in one pass use
+
+ FlashTool.flash_info(file)
+
+Returns hash with keys 'width', 'rate', 'height', 'frames', and all values are strings
+
+
+
+
