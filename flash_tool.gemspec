@@ -19,6 +19,8 @@ fonts and parsing data from flash files.}
   ]
   s.files = [
     ".gitignore",
+     ".loadpath",
+     ".project",
      "MIT-LICENSE",
      "README.rdoc",
      "Rakefile",
