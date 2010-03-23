@@ -44,6 +44,7 @@ fonts and parsing data from flash files.}
      "test/test_files/test.png",
      "test/test_files/test_with_password.pdf",
      "test/test_files/tester.swf",
+     "test/test_flash_combine.rb",
      "test/test_flash_object.rb",
      "test/test_flash_script.rb",
      "test/test_flash_tool.rb"
