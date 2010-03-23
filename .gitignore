@@ -6,3 +6,4 @@ coverage
 pkg
 .loadpath
 .project
+rdoc

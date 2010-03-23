@@ -15,6 +15,7 @@ module FlashTool
     # Can be used with or without master swf file
     #
     # ==Use
+    # 
     #  combinated_file = FlashTool::FlashCombine.new
     #  combinated_file.master("master.swf")
     #  combinated_file.slave("viewport","slave.swf") #viewport is name of frame where can be placed slave
@@ -22,10 +23,10 @@ module FlashTool
     #  combinated_file.save("merged.swf")
     #
     #  cominated_file = FlashTool::FlashCombine.new do |f|
-    #     f.master("master.swf")
-    #     f.slave("viewport","slave.swf")
-    #     f.output("merged.swf")
-    #     f.save
+    #   f.master("master.swf")
+    #   f.slave("viewport","slave.swf")
+    #   f.output("merged.swf")
+    #   f.save
     #  end
     #
     def initialize(&block)
@@ -35,15 +36,35 @@ module FlashTool
       yield self if block_given?
     end
 
-    def master(input)
+    #
+    # With this method you will set master swf file for combining
+    #
+    # Can be only one master file
+    #
+    # Raise FlashToolError
+    #
+    def master(file)
       raise(FlashToolError, "Can be only one master swf file" ) if @master
-      @master = input
+      @master = file
     end
-    def slave(name_id, input)
-      @slaves += ["#{name_id}=#{input}"]
+    
+    #
+    # With this method you will set slave swf file for combining 
+    # 
+    # Can be only one master file
+    # 
+    def slave(name, file)
+      @slaves += ["#{name}=#{file}"]
     end
 
+    #
+    # Method save generate and run swfcombine command and generates file
+    # Outputh path must be setted here or with method outputh before
+    #
+    # Raise error if output_path is not set.
+    # 
     def save(output_path=nil)
+      raise FlashToolError, "No output file name " if !@output_path and !output_path
       to_output_path(output_path)
       combiner
       run_command(@command,*@args)

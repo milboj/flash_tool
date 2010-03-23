@@ -1,8 +1,8 @@
-require 'flash.rb'
+require File.dirname(__FILE__) + '/flash.rb'
 module FlashTool
   class FlashObject < Flash
-    attr_reader :info
     attr_reader :type
+    attr :input
 
     # Input is path file with good extesnion
     # Approved formats are :
@@ -35,7 +35,7 @@ module FlashTool
 
     def self.from_blob(blob, ext, &block)
       begin
-        tempfile = Tempfile.new(['swf_tool', ext.to_s])
+        tempfile = Tempfile.new(['flash_tool', ext.to_s])
         tempfile.binmode
         tempfile.write(blob)
       ensure
@@ -59,7 +59,7 @@ module FlashTool
         command = "gif2swf"
       when "ttf", "afm",  "pfa", "pfb"
         command = "font2swf"
-      when "wav"
+      when "wav" #TODO Test wav for converting
         command = "wav2swf"
       else
         raise FlashToolError, "Invalid type"

@@ -7,7 +7,7 @@ require File.join(File.dirname(__FILE__), '../lib/flash_tool.rb')
 class FlashToolsTest < Test::Unit::TestCase
   include FlashTool
 
-  CURRENT_DIR = File.dirname(File.expand_path(__FILE__)) + "/"
+  CURRENT_DIR = File.dirname(File.expand_path(__FILE__)) + "/test_files/"
 
   PDF_FILE  = CURRENT_DIR + "test.pdf"
   PDF_PASSW_PROTECTED = CURRENT_DIR + "test_with_password.pdf"
@@ -63,12 +63,14 @@ class FlashToolsTest < Test::Unit::TestCase
   def test_pdf_create_with_password_without_save_declaration
     output_file = "#{CURRENT_DIR}/test_password.swf"
     begin
+    
       flash_object = FlashObject.new(PDF_PASSW_PROTECTED)
       flash_object.jpegquality(80)
       flash_object.password("test")
       flash_object.output(output_file)
       flash_object.save()
       assert(File.exist?(output_file))
+      assert_equal output_file, flash_object.output_path      
     ensure
       File.delete(output_file)
     end
@@ -126,6 +128,8 @@ class FlashToolsTest < Test::Unit::TestCase
       flash_object.quality(80)
       flash_object.save(output_file)
       assert(File.exist?(output_file))
+      assert_equal output_file, flash_object.output_path
+
     ensure
 
       File.delete(output_file)
@@ -204,13 +208,21 @@ class FlashToolsTest < Test::Unit::TestCase
       flash_object.output(output_file)
       assert_equal nil, flash_object.info
       flash_object.save()
-      assert_equal! nil, flash_object.info
+      assert_not_equal nil, flash_object.info
 
     ensure
       File.delete(output_file)
     end
+  end
 
-
+  def test_without_outputh_path
+    begin
+      flash_object = FlashObject.new(JPG_FILE)
+      flash_object.save()
+      assert_equal("#{CURRENT_DIR}test.swf" , flash_object.output_path)
+    ensure
+      File.delete(flash_object.output_path)
+    end
   end
 
 
