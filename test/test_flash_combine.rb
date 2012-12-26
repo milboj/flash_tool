@@ -40,7 +40,7 @@ class Test_Flash_Combine < Test::Unit::TestCase
       assert_kind_of(Hash, flash.info)
       assert(File.exist?(output_file))
     ensure
-      File.delete(output_file)
+      File.delete(output_file) 
     end
   end
 

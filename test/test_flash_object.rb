@@ -146,6 +146,7 @@ class FlashToolsTest < Test::Unit::TestCase
         f.output(output_file)
         f.save()
       end
+      puts output_file
       assert(File.exist?(output_file))
       assert_kind_of Hash, flash_object.info
       assert_equal output_file, flash_object.output_path
